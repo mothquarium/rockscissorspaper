@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="content"></div>
+    <script>
+        let playerScore = 0;
+        let compScore = 0;
+        const tieMsg = "IT'S A TIE!";
+        const playerWinMsg = "YOU GET A POINT!";
+        const compWinMsg = "COMPUTER GETS A POINT!";
+
+        function getPlayerChoice() {
+            return prompt("Rock, paper, or scissors?").toUpperCase();
+        }
+
+        function getComputerChoice() {
+            //works, returns 0-2
+            return Math.floor(Math.random() * 3);
+        }
+
+        function playRound() {
+            let playerMove = getPlayerChoice();
+            let compMove = getComputerChoice();
+            console.log("YOU CHOSE " + playerMove + ".");
+            switch (compMove) {
+                case 0:
+                    console.log("COMPUTER CHOOSES ROCK.");
+                    break;
+                case 1:
+                    console.log("COMPUTER CHOOSES PAPER.");
+                    break;
+                case 2:
+                    console.log("COMPUTER CHOOSES SCISSORS.")
+                    break;
+                default: 
+                    console.log("game machine broke");
+            }
+
+            if ((playerMove == "ROCK" && compMove == 0) ||
+                (playerMove == "PAPER" && compMove == 1) ||
+                (playerMove == "SCISSORS" && compMove == 2)) {
+                console.log(tieMsg);
+                console.log("SCORE: " + playerScore + " - " + compScore);
+            }
+            else if ((playerMove == "ROCK" && compMove == 2) ||
+                     (playerMove == "PAPER" && compMove == 0) ||
+                     (playerMove == "SCISSORS" && compMove == 1)) {
+                        console.log(playerWinMsg);
+                        playerScore++;
+                        console.log("SCORE: " + playerScore + " - " + compScore);
+                     }
+            else if ((playerMove == "ROCK" && compMove == 1) ||
+                     (playerMove == "PAPER" && compMove == 2) ||
+                     (playerMove == "SCISSORS" && compMove == 0)) {
+                        console.log(compWinMsg);
+                        compScore++;
+                        console.log("SCORE: " + playerScore + " - " + compScore);
+                     }
+        }
+
+        for (let i = 0; i < 5; i++) {
+            playRound();
+        }
+    </script>
+</body>
+</html>
