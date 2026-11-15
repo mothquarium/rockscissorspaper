@@ -6,17 +6,34 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="content"></div>
+    <div id="content">
+        <h1>ROCK, PAPER, OR SCISSORS?</h1>
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+        <div id="results">
+            <p>Rounds played: <span id="rounds-played"></span></p>
+            <p id="player-move"></p>
+            <p id="computer-move"></p>
+        </div>
+    </div>
     <script>
         let playerScore = 0;
         let compScore = 0;
+        let playerMove = "none";
+        let roundsPlayed = 0;
         const tieMsg = "IT'S A TIE!";
         const playerWinMsg = "YOU GET A POINT!";
         const compWinMsg = "COMPUTER GETS A POINT!";
+        const rockBtn = document.querySelector('#rock');
+        const paperBtn = document.querySelector('#paper');
+        const scissorsBtn = document.querySelector('#scissors');
+        const roundsPlayedTxt = document.querySelector('#rounds-played');
 
-        function getPlayerChoice() {
-            return prompt("Rock, paper, or scissors?").toUpperCase();
-        }
+        rockBtn.addEventListener("click", () => {playerMove = "ROCK"; playRound();});
+        paperBtn.addEventListener("click", () => {playerMove = "PAPER"; playRound();});
+        scissorsBtn.addEventListener("click", () => {playerMove = "SCISSORS"; playRound();});
+        
 
         function getComputerChoice() {
             //works, returns 0-2
@@ -24,7 +41,7 @@
         }
 
         function playRound() {
-            let playerMove = getPlayerChoice();
+            //let playerMove = getPlayerChoice();
             let compMove = getComputerChoice();
             console.log("YOU CHOSE " + playerMove + ".");
             switch (compMove) {
@@ -61,11 +78,14 @@
                         compScore++;
                         console.log("SCORE: " + playerScore + " - " + compScore);
                      }
+            
+            roundsPlayed = roundsPlayed++;
+            roundsPlayedTxt.textContent = roundsPlayed;
         }
 
-        for (let i = 0; i < 5; i++) {
+        /*for (let i = 0; i < 5; i++) {
             playRound();
-        }
+        }*/
     </script>
 </body>
 </html>
