@@ -12,9 +12,14 @@
         <button id="paper">Paper</button>
         <button id="scissors">Scissors</button>
         <div id="results">
-            <p>Rounds played: <span id="rounds-played"></span></p>
+            <p>Score: <span id="player-score">0</span> - <span id="comp-score">0</span></p>
+            <p>Rounds played: <span id="rounds-played">0</span></p>
+            <strong id="winner"></strong>
             <p id="player-move"></p>
             <p id="computer-move"></p>
+            <em id="win-lose"></em>
+            <hr>
+            <div id="scoreboard"></div>
         </div>
     </div>
     <script>
@@ -29,6 +34,9 @@
         const paperBtn = document.querySelector('#paper');
         const scissorsBtn = document.querySelector('#scissors');
         const roundsPlayedTxt = document.querySelector('#rounds-played');
+        const playerScoreTxt = document.querySelector('#player-score');
+        const compScoreTxt = document.querySelector('#comp-score');
+        
 
         rockBtn.addEventListener("click", () => {playerMove = "ROCK"; playRound();});
         paperBtn.addEventListener("click", () => {playerMove = "PAPER"; playRound();});
@@ -41,18 +49,23 @@
         }
 
         function playRound() {
-            //let playerMove = getPlayerChoice();
+            /*these assignments dont feel good but i dont think id have a way to do it well w/o
+            trying to pass objects in*/
+            const playerMoveTxt = document.querySelector('#player-move');
+            const computerMoveTxt = document.querySelector('#computer-move');
+            const winLoseTxt = document.querySelector('#win-lose');
+
             let compMove = getComputerChoice();
-            console.log("YOU CHOSE " + playerMove + ".");
+            playerMoveTxt.textContent = "You chose " + playerMove.toLowerCase() + ".";
             switch (compMove) {
                 case 0:
-                    console.log("COMPUTER CHOOSES ROCK.");
+                    computerMoveTxt.textContent = "Computer chooses rock.";
                     break;
                 case 1:
-                    console.log("COMPUTER CHOOSES PAPER.");
+                    computerMoveTxt.textContent = "Computer chooses paper.";
                     break;
                 case 2:
-                    console.log("COMPUTER CHOOSES SCISSORS.")
+                    computerMoveTxt.textContent = "Computer chooses scissors.";
                     break;
                 default: 
                     console.log("game machine broke");
@@ -61,31 +74,40 @@
             if ((playerMove == "ROCK" && compMove == 0) ||
                 (playerMove == "PAPER" && compMove == 1) ||
                 (playerMove == "SCISSORS" && compMove == 2)) {
-                console.log(tieMsg);
-                console.log("SCORE: " + playerScore + " - " + compScore);
+                    winLoseTxt.textContent = tieMsg;
             }
             else if ((playerMove == "ROCK" && compMove == 2) ||
                      (playerMove == "PAPER" && compMove == 0) ||
                      (playerMove == "SCISSORS" && compMove == 1)) {
-                        console.log(playerWinMsg);
+                        winLoseTxt.textContent = playerWinMsg;
                         playerScore++;
-                        console.log("SCORE: " + playerScore + " - " + compScore);
                      }
             else if ((playerMove == "ROCK" && compMove == 1) ||
                      (playerMove == "PAPER" && compMove == 2) ||
                      (playerMove == "SCISSORS" && compMove == 0)) {
-                        console.log(compWinMsg);
+                        winLoseTxt.textContent = compWinMsg;
                         compScore++;
-                        console.log("SCORE: " + playerScore + " - " + compScore);
                      }
             
-            roundsPlayed = roundsPlayed++;
+            roundsPlayed++;
             roundsPlayedTxt.textContent = roundsPlayed;
-        }
+            playerScoreTxt.textContent = playerScore;
+            compScoreTxt.textContent = compScore;
 
-        /*for (let i = 0; i < 5; i++) {
-            playRound();
-        }*/
+            if (roundsPlayed % 5 === 0) {
+                //make decision + append paragraph
+                if (playerScore > compScore) {
+                    //
+                }
+                else if (playerScore < compScore) {
+                    //
+                }
+                else if (playerScore == compScore) {
+                    //
+                }
+            }
+
+        }
     </script>
 </body>
 </html>
