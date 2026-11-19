@@ -19,7 +19,9 @@
             <p id="computer-move"></p>
             <em id="win-lose"></em>
             <hr>
-            <div id="scoreboard"></div>
+            <div id="scoreboard">
+                <h2>Scoreboard</h2>
+            </div>
         </div>
     </div>
     <script>
@@ -54,6 +56,7 @@
             const playerMoveTxt = document.querySelector('#player-move');
             const computerMoveTxt = document.querySelector('#computer-move');
             const winLoseTxt = document.querySelector('#win-lose');
+            const scoreboard = document.querySelector('#scoreboard')
 
             let compMove = getComputerChoice();
             playerMoveTxt.textContent = "You chose " + playerMove.toLowerCase() + ".";
@@ -97,16 +100,21 @@
             if (roundsPlayed % 5 === 0) {
                 //make decision + append paragraph
                 if (playerScore > compScore) {
-                    //
+                    const playerWinTxt = document.createElement('p');
+                    scoreboard.appendChild(playerWinTxt);
+                    playerWinTxt.textContent = "You won!";
                 }
                 else if (playerScore < compScore) {
-                    //
+                    const compWinTxt = document.createElement('p');
+                    scoreboard.appendChild(compWinTxt);
+                    compWinTxt.textContent = "Computer won!";
                 }
-                else if (playerScore == compScore) {
-                    //
+                else if (playerScore === compScore) {
+                    const noWinTxt = document.createElement('p');
+                    scoreboard.appendChild(noWinTxt);
+                    noWinTxt.textContent = "You tied.";
                 }
             }
-
         }
     </script>
 </body>
